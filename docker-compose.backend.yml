@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  user-service:
+    build: ./backend-java/user-service
+    ports: ['8081:8081']
+  product-service:
+    build: ./backend-java/product-service
+    ports: ['8082:8082']
+  order-service:
+    build: ./backend-java/order-service
+    ports: ['8083:8083']
+  gateway:
+    build: ./backend-java/gateway
+    ports: ['8080:8080']
+    depends_on: [user-service, product-service, order-service]
+  nextjs-bff:
+    build: ./nextjs-bff
+    environment:
+      NEXT_PUBLIC_SPRING_GATEWAY_URL: http://gateway:8080
+    ports: ['3000:3000']
+    depends_on: [gateway]
