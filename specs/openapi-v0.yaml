@@ -1,15 +1,36 @@
 openapi: 3.0.3
 info:
   title: Ot-chawon API v0
-  version: 0.1.0
+  version: 0.2.0
 servers:
   - url: http://localhost:8080
+components:
+  schemas:
+    ApiError:
+      type: object
+      required: [success, message, traceId]
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: invalid request payload
+        traceId:
+          type: string
+          example: 9f4a8f8a3f7b4e0f
 paths:
   /api/v1/auth/login:
     post:
       summary: Login
       responses:
         '200': { description: OK }
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
   /api/v1/auth/refresh:
     post:
       summary: Refresh token
