@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: Ot-chawon API v0
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/v1/auth/login:
+    post:
+      summary: Login
+      responses:
+        '200': { description: OK }
+  /api/v1/auth/refresh:
+    post:
+      summary: Refresh token
+      responses:
+        '200': { description: OK }
+  /api/v1/users/me:
+    get:
+      summary: Get my profile
+      responses:
+        '200': { description: OK }
+    patch:
+      summary: Update my profile
+      responses:
+        '200': { description: OK }
+  /api/v1/products:
+    get:
+      summary: List products
+      responses:
+        '200': { description: OK }
+    post:
+      summary: Create product
+      responses:
+        '201': { description: Created }
+  /api/v1/products/{id}:
+    get:
+      summary: Get product detail
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+    patch:
+      summary: Update product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+  /api/v1/orders:
+    post:
+      summary: Create order
+      responses:
+        '201': { description: Created }
+  /api/v1/orders/{id}:
+    get:
+      summary: Get order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
